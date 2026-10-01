@@ -1,10 +1,12 @@
 import React, { use } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import "./Navbar.css";
 import { AuthContext } from "../../../contexts/AuthContext/AuthContext";
 const Navbar = () => {
-  const authInfo = use(AuthContext);
-  console.log('navbar',authInfo);
+  // const authInfo = use(AuthContext);
+  // console.log('navbar',authInfo);
+
+  const { user } = use(AuthContext);
 
   const links = (
     <>
@@ -59,7 +61,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user ? <a className="btn">SignOut</a> : <Link to="/login">Login</Link>}
       </div>
     </div>
   );
