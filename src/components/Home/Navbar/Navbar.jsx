@@ -1,18 +1,27 @@
-import React from "react";
+import React, { use } from "react";
 import { NavLink } from "react-router";
-import './Navbar.css'
+import "./Navbar.css";
+import { AuthContext } from "../../../contexts/AuthContext/AuthContext";
 const Navbar = () => {
+  const authInfo = use(AuthContext);
+  console.log('navbar',authInfo);
 
-    const links = (
-      <>
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/about">About</NavLink></li>
-        <li><NavLink to="/login">Login</NavLink></li>
-        <li><NavLink to="/register">Register</NavLink></li>
-
-       
-      </>
-    );
+  const links = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/about">About</NavLink>
+      </li>
+      <li>
+        <NavLink to="/login">Login</NavLink>
+      </li>
+      <li>
+        <NavLink to="/register">Register</NavLink>
+      </li>
+    </>
+  );
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
