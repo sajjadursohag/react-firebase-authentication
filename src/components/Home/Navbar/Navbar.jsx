@@ -6,7 +6,15 @@ const Navbar = () => {
   // const authInfo = use(AuthContext);
   // console.log('navbar',authInfo);
 
-  const { user } = use(AuthContext);
+  const { user, signOutUser } = use(AuthContext);
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const links = (
     <>
@@ -22,6 +30,19 @@ const Navbar = () => {
       <li>
         <NavLink to="/register">Register</NavLink>
       </li>
+      <li>
+        <NavLink to="/dashboard">Dashboard</NavLink>
+      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to="/orders">Orders</NavLink>
+          </li>
+          <li>
+            <NavLink to="/profile">Profile</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
@@ -61,7 +82,21 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        {user ? <a className="btn">SignOut</a> : <Link to="/login">Login</Link>}
+        {/* {user ? (
+          <a onClick={handleSignOut} className="btn">
+            SignOut
+          </a>
+        ) : (
+          <Link to="/login">SignOut</Link>
+        )} */}
+
+        {user ? (
+          <a onClick={handleSignOut} className="btn">
+            SignOut
+          </a>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
       </div>
     </div>
   );
